@@ -4,15 +4,12 @@ function activatePlacesSearch(){
         types: ['(cities)'],
         componentRestrictions: {country: ['us', 'can']}
        };
-      
-
     var input = document.getElementById("city-search");
     var autocomplete = new google.maps.places.Autocomplete(input,options);
 }
 
-function listPageLoad(city, listType){
-    console.log(city);
-    console.log(listType);
+function listLoad (city, list){
+    console.log("Load List: " + list + " For " + city);
 }
 
  $(".city-input").focus(function(){
@@ -26,18 +23,10 @@ function listPageLoad(city, listType){
     $(".selCard").animate({opacity: 1});
 });
 
-$("#eatDiv").on("click", function(event) {
+$(".cardDiv").on("click", function(event) {
+    console.log("clicked");
+    clickedCard = $(this).attr("data");
     event.preventDefault();
     var city = $("#city-search").val();
-    listPageLoad(city,"eat");
-});
-$("#sleepDiv").on("click", function(event) {
-    event.preventDefault();
-    var city = $("#city-search").val();
-    listPageLoad(city,"sleep");
-});
-$("#visitDiv").on("click", function(event) {
-    event.preventDefault();
-    var city = $("#city-search").val();
-    listPageLoad(city,"visit");
+    listLoad(city,clickedCard);
 });
