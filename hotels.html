@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>hotels for travel ten </title>
+</head>
+
+<body>
+    <div class="hotel"></div>
+    <div class="latitude"></div>
+    <div class="longtitude"></div>
+    <div class="rating"></div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        function runAjaxCall() {
+            console.log("Starting API Call");
+            var apiKey = "80fivxux2uyah50aog41t7joiycujtas";
+            var apiAccountID = "MD9PFX96";
+            var city = "Tokyo";
+            //var myurl = "https://www.triposo.com/api/20181213/poi.json?location_id=Paris&tag_labels=hotels&count=10" + "&account=" + apiAccountID + "&token=" + apiKey;
+            var myurl = "https://www.triposo.com/api/20181213/poi.json?location_id=" + city + "&tag_labels=hotels&count=10" + "&account=" + apiAccountID + "&token=" + apiKey;
+
+            //useful additions
+            // &fields=id,name,score,intro,tag_labels&order_by=-score
+            console.log(myurl);
+
+            console.log("start ajax call");
+            $.ajax({
+                url: myurl,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response);
+                $(".hotel").append("<h2> City : " + city + "</h2>");
+                for (var i = 0; i < 10; i ++){
+                    var hotelNumber = i+1;
+                    $(".hotel").append(
+                        "<h3> hotel " + hotelNumber + "</h3>" +
+                        "<p> Hotel Name " + response.results[i].name + "</p>" +
+                        "<p> latitude " + response.results[i].coordinates.latitude + "</p>" +
+                        "<p> longtitude " + response.results[i].coordinates.longitude + "</p>" +
+                        "<p> rating " + response.results[i].hotels_score + "</p>" +
+                        "<p> book here " + response.results[i].booking_info.vendor_object_url + "</p>" +
+                        "<p> description " + response.results[i].snippet + "</p>" +
+                        "<p> images " + response.results[i].images[0].source_url + "</p>"
+
+
+
+                        );
+                }
+                
+            });
+            console.log("end ajax call");
+        }
+
+        runAjaxCall();
+    </script>
+</body>
+
+</html>
