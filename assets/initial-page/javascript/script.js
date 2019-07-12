@@ -1,13 +1,43 @@
-var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=by-chloe&location=boston";
 
-$.ajax({
-    url: myurl,
-    headers: {
-        "Authorization":"Bearer TX_Msat5ZgN55sxNe0gri6yNsfxnx_1UeIdyPfvvGy-6YIrE2Vo3hxcwPln6qhrhYjnxfkp8fQ42PN6_STVLMVzZ_YM2a3CLUhhplGHuTS6YFF4BiBm3QHkaYyElXXY",
-    },
-    method: 'GET',
-    dataType: 'json',
-    success: function(data){
-        console.log('success: '+data);
-    }
-});      
+function activatePlacesSearch(){
+    var options = {
+        types: ['(cities)'],
+        componentRestrictions: {country: ['us', 'can']}
+       };
+      
+
+    var input = document.getElementById("city-search");
+    var autocomplete = new google.maps.places.Autocomplete(input,options);
+}
+
+function listPageLoad(city, listType){
+    console.log(city);
+    console.log(listType);
+}
+
+ $(".city-input").focus(function(){
+    $("#dynamicHeader").animate({height: 50});
+    $(".headerBox").slideDown();
+ });
+ $(".city-input").focusout(function(){
+    $("#dynamicHeader").animate({height: 0});
+    $(".searchBar").animate({marginTop: 0});
+    $(".selCard").css("height", "100%");
+    $(".selCard").animate({opacity: 1});
+});
+
+$("#eatDiv").on("click", function(event) {
+    event.preventDefault();
+    var city = $("#city-search").val();
+    listPageLoad(city,"eat");
+});
+$("#sleepDiv").on("click", function(event) {
+    event.preventDefault();
+    var city = $("#city-search").val();
+    listPageLoad(city,"sleep");
+});
+$("#visitDiv").on("click", function(event) {
+    event.preventDefault();
+    var city = $("#city-search").val();
+    listPageLoad(city,"visit");
+});
