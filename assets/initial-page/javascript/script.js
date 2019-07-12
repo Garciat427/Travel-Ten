@@ -10,6 +10,7 @@ function activatePlacesSearch(){
 
 function listLoad (city, list){
     console.log("Load List: " + list + " For " + city);
+    
 }
 
  $(".city-input").focus(function(){
