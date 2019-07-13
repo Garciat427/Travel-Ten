@@ -84,11 +84,19 @@ class place {
 var hotelArray = [];
 
 function hotelCall() {
+    var cityLat = 43.6681852;
+    var cityLng = -79.3950505;
     console.log("Starting API Call");
     var apiKey = "80fivxux2uyah50aog41t7joiycujtas";
     var apiAccountID = "MD9PFX96";
     var city = "Cape_Town";
-    var myurl = "https://www.triposo.com/api/20181213/poi.json?location_id=" + city + "&tag_labels=hotels&count=10" + "&account=" + apiAccountID + "&token=" + apiKey;
+    var myurl = "https://www.triposo.com/api/20181213/poi.json?";
+    myurl += "annotate=distance:" + cityLat + "," + cityLng; //latitude X longitude. Example toronto "43.6681852" X "-79.3950505"
+    myurl += "&distance=<10000";
+    //myurl += city; 
+    myurl += "&tag_labels=hotels&count=10"; 
+    myurl += "&account=" + apiAccountID; 
+    myurl += "&token=" + apiKey;
 
     console.log(myurl);
 
@@ -135,7 +143,6 @@ function printArray(array) {
         console.log("rating using class" + array[i].getRating());
         console.log("image using class" + array[i].getImgUrl());
         console.log("book using class" + array[i].getbookUrl());
-
     }
 }
 
