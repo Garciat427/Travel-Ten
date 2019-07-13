@@ -1,5 +1,5 @@
 
-
+/* ******** THIS IS WILL HOLD ALL THE VISITS AREAS********* */
 var visitList = [];
 
 //tripso keys
@@ -66,10 +66,9 @@ function getVistsAjaxCallFromTripso(cityLat, cityLong) {
     });
 }
 
+/* ******** THIS IS AN EXAMPLE ON HOW TO MAKE A CALL TO TRIPSO TO GET VISITS********* */
+// getVistsAjaxCallFromTripso("43.6681852", "-79.3950505");
 
-
-
-getVistsAjaxCallFromTripso("43.6681852", "-79.3950505");
-console.log("visit List call start");
-console.log(visitList);
-console.log("visit List call end");
+// console.log("visit List call start");
+// console.log(visitList);
+// console.log("visit List call end");
