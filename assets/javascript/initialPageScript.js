@@ -10,18 +10,37 @@ function activatePlacesSearch(){
 
 function listLoad (city, list){
     console.log("Load List: " + list + " For " + city);
+    $("#initialPage").animate({opacity: 0},800, function(){
+        $("#initialPage").empty();
+    });
+    
     
 }
 
  $(".city-input").focus(function(){
     $("#dynamicHeader").animate({height: 50});
     $(".headerBox").slideDown();
+    $("#city-ipput-label").text("Enter your city");
  });
+
  $(".city-input").focusout(function(){
-    $("#dynamicHeader").animate({height: 0});
-    $(".searchBar").animate({marginTop: 0});
-    $(".selCard").css("height", "100%");
-    $(".selCard").animate({opacity: 1});
+
+    if ($("#city-search").val() === ""){
+        console.log("empty");
+        $("#city-ipput-label").text("Please enter valid city");
+    }
+    else{
+        $(".overlay").css("visibility","visible");
+        $(".cardDiv").css("visibility","visible");
+        $(".cardLbl").animate({opacity: 1});
+        $("#city-ipput-label").text("Your City");
+        $("#dynamicHeader").animate({height: 0});
+        $(".searchBar").animate({marginTop: 0});
+        $(".selCard").css("height", "100%");
+        $(".selCard").animate({opacity: 1});
+    }
+        
+    
 });
 
 $(".cardDiv").on("click", function(event) {

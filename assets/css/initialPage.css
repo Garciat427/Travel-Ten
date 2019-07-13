@@ -61,7 +61,11 @@ input[type=text] {
     opacity: 0;
 }
 
+.cardDiv{
+  visibility: hidden;
+}
 .overlay {
+    visibility: hidden;
     position: absolute;
     top: 0;
     bottom: 0;
