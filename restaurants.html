@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>restaurants - hidden gems for travel ten</title>
+</head>
+
+<body>
+    <div class="restaurant"></div>
+    <div class="latitude"></div>
+    <div class="longtitude"></div>
+    <div class="rating"></div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        function runAjaxCall() {
+            console.log("Starting API Call");
+            var apiKey = "80fivxux2uyah50aog41t7joiycujtas";
+            var apiAccountID = "MD9PFX96";
+            // if city has 2 words, use underscore to connect the words, so new york will be new_york
+            var city = "Cape_Town";
+            //var myurl = "https://www.triposo.com/api/20181213/poi.json?location_id=Paris&tag_labels=hotels&count=10" + "&account=" + apiAccountID + "&token=" + apiKey;
+            var myurl = "https://www.triposo.com/api/20181213/poi.json?location_id="+ city + "&tag_labels=frequented_by_locals&tag_labels=eatingout&order_by=-frequented_by_locals_score&count=10" + "&account=" + apiAccountID + "&token=" + apiKey;
+
+            //useful additions
+            // &fields=id,name,score,intro,tag_labels&order_by=-score
+            console.log(myurl);
+
+            console.log("start ajax call");
+            $.ajax({
+                url: myurl,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response);
+                $(".restaurant").append("<h2> City : " + city + "</h2>");
+                for (var i = 0; i < 10; i ++){
+                    var restaurantNumber = i+1;
+                    $(".restaurant").append(
+                        "<h3> restaurant :" + restaurantNumber + "</h3>" +
+                        "<p> Restaurant Name :" + response.results[i].name + "</p>" +
+                        "<p> latitude :" + response.results[i].coordinates.latitude + "</p>" +
+                        "<p> longtitude " + response.results[i].coordinates.longitude + "</p>" +
+                        "<p> description: " + response.results[i].snippet + "</p>" +
+                        "<p> Score :" + response.results[i].score + "</p>" 
+                        //there is an jquery error if there is no image
+                        //"<p> Image Thumbnail :" + response.results[i].images[0].sizes.thumbnail.url + "</p>" 
+
+
+
+                        );
+                }
+                
+            });
+            console.log("end ajax call");
+        }
+
+        runAjaxCall();
+    </script>
+</body>
+
+</html>
