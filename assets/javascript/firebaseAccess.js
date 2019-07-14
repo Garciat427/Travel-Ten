@@ -18,24 +18,30 @@ var database = firebase.database();
 /********************************** Saving to Firebase ***********************************/
 
 // Save the details of the search ensuring that all data is loaded from the APIs
-function saveAsyncResults(cityName, cityLong, cityLat, cityVisits, cityFoods, cityHotels, dateEntered) {
+function saveAsyncResultsToFireBaseDB(cityName, cityLongInput, cityLatInput, cityVisits, cityFoods, cityHotels, dateEntered) {
   var citySearch = {
     city: cityName,
-    longitude: cityLong + "",
-    latitude: cityLat + "",
+    longitude: cityLongInput + "",
+    latitude: cityLatInput + "",
     visits: cityVisits,
     foods: cityFoods,
     hotels: cityHotels,
     dateCreated: dateEntered
   };
 
+  var timeOutCount = 0;
   // Timer to save data only once all data is loaded 
   var intvl = setInterval(function () {
 
     // Check that the data is loaded for visits, hotels, and foods. If any of them are not loaded then wait 1/2 sec.
     // Otherwise everything is loaded and so can be saved to firebase
-    if (cityVisits.length === 0 || cityFoods.length === 0 || cityHotels === 0) {
+    if (timeOutCount > 10) {
+      console.log("5 seconds waited, timing out now");
+      clearInterval(intvl);
+
+    } else if (cityVisits.length === 0 || cityFoods.length === 0 || cityHotels.length === 0) {
       console.log("Waiting for data to finish loading from API");
+      timeOutCount++;
 
     } else {
       console.log("All data loaded, saving to the firebase database");
@@ -48,11 +54,13 @@ function saveAsyncResults(cityName, cityLong, cityLat, cityVisits, cityFoods, ci
 
 /********************************** reading from Firebase ***********************************/
 /**
- * IMPORTANT: Look at the test funtion below (Scroll down to testingReadingFromDB) to see how to retrive information from the database and use it. 
+ * IMPORTANT: s
+ * Look at the test funtion below (Scroll down to testingReadingFromDB) to see how to retrive information from the database and use it. 
  * There is a delay factor that needs to be considred
  * When data is read, it will be stored in citySearchFormDB
  * 
- * IMPORTANT: When you look at the citySearchFromDB object, look at "foundRecord". if true, then use the data in here. otherwise make the standard API calls.
+ * IMPORTANT: 
+ * When you look at the citySearchFromDB object, look at "foundRecord". if true, then use the data in here. otherwise make the standard API calls.
  */
 
 var citySearchFromDB = {
@@ -105,7 +113,7 @@ function testWritingToDB() {
   console.log("Testing Saving to FireBase");
   getVistsAjaxCallFromTripso(myTestlong, myTestLat);
   // THS IS AN EXAMPLE ON HOW TO SAVE. 
-  saveAsyncResults("Toronto2", myTestlong, myTestLat, visitList, visitList, visitList, Date.now());
+  saveAsyncResultsToFireBaseDB("Toronto2", myTestlong, myTestLat, visitList, visitList, visitList, Date.now());
 
 }
 
@@ -119,7 +127,7 @@ function testingReadingFromDB() {
 
   // Timer to get and use the data only once all is loaded 
   var intvl = setInterval(function () {
-    
+
     // check if the data is loaded. if not, wait .5 seconds
     if (!citySearchFromDB.searchComplete) {
       console.log("Waiting for data to finish loading from DB");
@@ -134,5 +142,5 @@ function testingReadingFromDB() {
 
 }
 
-//testWritingToDB();
+// testWritingToDB();
 // testingReadingFromDB();
