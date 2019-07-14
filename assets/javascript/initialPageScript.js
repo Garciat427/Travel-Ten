@@ -1,51 +1,36 @@
 
-    
-    
-    function activatePlacesSearch(){
-        var options = {
-            types: ['(cities)'],
-            componentRestrictions: {country: ['us', 'can']}
-        };
-        var input = document.getElementById("city-search");
-        var autocomplete = new google.maps.places.Autocomplete(input,options);
-    }
+/* ******** FILE THAT WILL HOLD ALL THE GOOGLE API WORK ********* */
 
-    function listLoad (city, list){
-        console.log("Load List: " + list + " For " + city);
-        $("#initialPage").animate({opacity: 0},800, function(){
-            $("#initialPage").empty();
-            startLists(city,list);
-        });
-    }
+var googleApiKey = "AIzaSyDHgz_wG-Dmq9lS70RvyrgVnFdSiNh2m6c"
 
-    $(".city-input").focus(function(){
-        $("#dynamicHeader").animate({height: 50});
-        $(".headerBox").slideDown();
-        $("#city-ipput-label").text("Enter your city");
-    });
+var cityName
+var coordinates = ["", ""];
 
-    $(".city-input").focusout(function(){
+function geocodeCity(city, list) {
+    cityName = city;
+    console.log("city" + cityName);
+    var geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + cityName.replace(" ", "+") + "&key=" + googleApiKey;
 
-        if ($("#city-search").val() === ""){
-            console.log("empty");
-            $("#city-ipput-label").text("Please enter valid city");
-        }
-        else{
-            $(".overlay").css("visibility","visible");
-            $(".cardDiv").css("visibility","visible");
-            $(".cardLbl").animate({opacity: 1});
-            $("#city-ipput-label").text("Your City");
-            $("#dynamicHeader").animate({height: 0});
-            $(".searchBar").animate({marginTop: 0});
-            $(".selCard").css("height", "100%");
-            $(".selCard").animate({opacity: 1});
+    $.ajax({
+        url: geocodeUrl,
+        dataType: 'json',
+        success: function (data) {
+            
+            coordinates[0] = (data.results[0].geometry.location.lat);
+            coordinates[1] = (data.results[0].geometry.location.lng);
+            
+            console.log("Coordinates: " + coordinates);
+            startLists(); //Load lists after geocoding is complete
         }
     });
+    return coordinates;
+};
 
-    $(".cardDiv").on("click", function(event) {
-        console.log("clicked");
-        clickedCard = $(this).attr("data");
-        event.preventDefault();
-        var city = $("#city-search").val();
-        listLoad(city,clickedCard);
-    });
+function activatePlacesSearch() {
+    var options = {
+        types: ['(cities)'],
+        componentRestrictions: { country: ['us', 'can'] }
+    };
+    var input = document.getElementById("city-search");
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
+}
