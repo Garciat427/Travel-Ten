@@ -1,8 +1,14 @@
+/* ******** FILE THAT WILL HOLD ALL JS CALLs ********* */
 
+// CLASS DEFINITION THAT WILL HOLD ALL DATA REGARDING ONE PLACE
 class place {
+
+    // MANDATORY FIELDS
     name = "";
     longitude = "";
     latitude = "";
+
+    // EXTRA FIELDS
     rating = 0;
     description = "";
     address = "";
@@ -20,7 +26,7 @@ class place {
 
     getName() {
         return this.name;
-    }
+    };
 
     setCoordinates(placeLong, placeLat) {
         this.longitude = placeLong;
@@ -29,11 +35,11 @@ class place {
 
     getLongitude() {
         return this.longitude;
-    }
+    };
 
     getLatitude() {
         return this.latitude;
-    }
+    };
 
     setRating(placeRate) {
         this.rating = placeRate;
@@ -67,41 +73,19 @@ class place {
         return this.imgUrl;
     };
 
+    //to question
+    setbookUrl(placeImg) {
+        this.bookUrl = placeImg;
+    };
+    // to question
+    getbookUrl() {
+        return this.bookUrl;
+    };
+
 };
 
-var foodArray = [];
-
-function getFoodResponse() {
-    var url = "https://api.foursquare.com/v2/venues/search?v=20161016&ll=43.66%2C%20-79.39&query=food&intent=browse&radius=2000&client_id=O3VAAPG2MY5H2QERHNM2G03DOKVHN1L1ESUD31251FVEMUXY&client_secret=40B2KAJFL2F5UFSP1WXSBYAM3UPDFI3GAMTBRGC20KIN53YJ";
-    $.ajax({
-        url: url,
-        dataType: 'json',
-        success: function (data) {
-            var venues = data.response.venues;
-            console.log(venues);
-
-            for (var i = 0; i < 10; i++) {
-
-                var name = venues[i].name;
-                var long = venues[i].location.lng;
-                var lat = venues[i].location.lat;
-                var plc = new place(name, long, lat);
-
-                plc.setAddress(venues[i].location.address);
-                
-                foodArray.push(JSON.stringify(plc));
-                
-            }
-            return foodArray;
-
-        }
-    });
-   
-};
-
-
-
-function printArray(array) {
+//to be reviewed/deleted
+function prinstArray(array) {
     for (var i = 0; i < array.length; i++) {
         console.log(array[i].getName);
         console.log(array[i].getLongitude);
@@ -110,5 +94,49 @@ function printArray(array) {
     }
 }
 
-getFoodResponse();
-printArray(foodArray);
+$(".cardDiv").on("click", function (event) {
+    console.log("clicked");
+    clickedCard = $(this).attr("data");
+    event.preventDefault();
+    var city = $("#city-search").val();
+    console.log("City: " + city);
+    listLoad(city, clickedCard);
+});
+
+$(".city-input").focusout(function () {
+
+    if ($("#city-search").val() === "") {
+        console.log("empty");
+        $("#city-ipput-label").text("Please enter valid city");
+    } else {
+        $(".overlay").css("visibility", "visible");
+        $(".cardDiv").css("visibility", "visible");
+        $(".cardLbl").animate({ opacity: 1 });
+        $("#city-ipput-label").text("Your City");
+        $("#dynamicHeader").animate({ height: 0 });
+        $(".searchBar").animate({ marginTop: 0 });
+        $(".selCard").css("height", "100%");
+        $(".selCard").animate({ opacity: 1 });
+    }
+});
+
+function listLoad(city, list) {
+    console.log("Load List: " + list + " for " + city);
+    $("#initialPage").animate({ opacity: 0 }, 800, function () {
+        $("#initialPage").empty();
+        geocodeCity(city, list);
+    });
+}
+
+$(".city-input").focus(function () {
+    $("#dynamicHeader").animate({ height: 50 });
+    $(".headerBox").slideDown();
+    $("#city-ipput-label").text("Enter your city");
+});
+
+function startLists() {
+    //Any api function calls below
+    getFoodAjaxCall(); 
+    getVisitAjaxCall(); 
+    // getHotelAjaxCall();
+}

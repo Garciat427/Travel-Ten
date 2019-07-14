@@ -13,7 +13,7 @@ function geocodeCity (city, list) {
         success: function (data) {
             cityLat = (data.results[0].geometry.location.lat);
             cityLng = (data.results[0].geometry.location.lng);
-            //console.log(cityLat + "," + cityLng);
+            console.log(cityLat + "," + cityLng);
 
             startLists(); //Load lists after geocoding is complete
         }  
