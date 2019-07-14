@@ -84,7 +84,8 @@ class place {
 
 };
 
-function printArray(array) {
+//to be reviewed/deleted
+function prinstArray(array) {
     for (var i = 0; i < array.length; i++) {
         console.log(array[i].getName);
         console.log(array[i].getLongitude);
@@ -135,7 +136,7 @@ $(".city-input").focus(function () {
 
 function startLists() {
     //Any api function calls below
-    getFoodAjaxCall(); //Call from script.js
-    getVisitAjaxCall(); //Call from tripsoapp.js
-    getHotelAjaxCall() //Call from hotel.js
+    getFoodAjaxCall(); 
+    getVisitAjaxCall(); 
+    // getHotelAjaxCall();
 }

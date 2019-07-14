@@ -33,6 +33,7 @@ function getFoodAjaxCall() {
 
         success: function (data) {
             var venues = data.response.venues;
+            console.log("FOOD response:");
             console.log(venues);
 
             // loop through the API

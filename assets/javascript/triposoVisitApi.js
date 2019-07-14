@@ -32,7 +32,7 @@ function getVisitAjaxCall() {
     }).then(function (response) {
 
         var returnedResults = response.results;
-        var compiledResults = [];
+        console.log("VISIT response:");
         console.log(returnedResults);
 
         // loop through the API 

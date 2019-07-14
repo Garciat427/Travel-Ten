@@ -19,7 +19,7 @@ function geocodeCity(city, list) {
             coordinates[0] = (data.results[0].geometry.location.lat);
             coordinates[1] = (data.results[0].geometry.location.lng);
             
-            console.log("Coordinates: " + coordinates);
+            // console.log("Coordinates: " + coordinates);
             startLists(); //Load lists after geocoding is complete
         }
     });

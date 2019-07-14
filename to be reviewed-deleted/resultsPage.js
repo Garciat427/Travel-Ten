@@ -32,35 +32,3 @@ function startLists() {
     console.log(visitList);
     console.log(hotelArray);
 }
-
-/* 
-
-var googleApiKey = "AIzaSyDHgz_wG-Dmq9lS70RvyrgVnFdSiNh2m6c"
-var cityLat;
-var cityLng;
-var cityName;
-
-var coordinates = ["",""];
-
-function startLists (city, list) {
-    cityName = city;
-    var geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + cityName.replace(" ","+") + "&key=" + googleApiKey;
-
-    $.ajax({
-        url: geocodeUrl,
-        dataType: 'json',
-        success: function (data) {
-            coordinates[0] = (data.results[0].geometry.location.lat);
-            coordinates[1] = (data.results[0].geometry.location.lng);
-            
-            console.log(coordinates);
-        }  
-    });
-};
-
-console.log(coordinates);
-getFoodAjaxCall(coordinates[0], coordinates[1]);
-getHotelAjaxCall(coordinates[0], coordinates[1]);
-getVisitAjaxCall(coordinates[0], coordinates[1]);
-
-*/
