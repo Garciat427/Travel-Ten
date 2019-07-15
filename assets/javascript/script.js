@@ -127,7 +127,10 @@ function listLoad(city, list) {
     geocodeCity(city);
     $("#initialPage").animate({ opacity: 0 }, 800, function () {
         $("#initialPage").empty();
+        
         loadingPage(list);
+        
+        
     });
 }
 
@@ -147,10 +150,13 @@ function loadingPage(list) {
     $("#loadingPage").animate({opacity: 1});
     console.log(list);
     if (list === "visit"){
+        $("#listTitle").text("City Visits");
         var loadedArr = visitList;
     } else if (list === "food"){
+        $("#listTitle").text("City Eats");
         var loadedArr = foodList;
     } else {
+        $("#listTitle").text("City Sleeps");
         var loadedArr = hotelList;
     }
     console.log (loadedArr)
@@ -239,10 +245,9 @@ function displayResults() {
     
     });
 }
-$(document).ready(function() {
 
 
-    $("#results-right").on("click",'.selItemBtn' ,function (event) {
+    $("#results").on("click",'.selItemBtn' ,function (event) {
         event.preventDefault();
         console.log("clicked");
         
@@ -250,4 +255,5 @@ $(document).ready(function() {
         
         loadItemMap(item);
     });
-});
+
+    

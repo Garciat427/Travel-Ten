@@ -91,7 +91,7 @@ function loadItemMap(item) {
 
     
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 10,
+      zoom: 17,
       center: new google.maps.LatLng(item.latitude, item.longitude),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
@@ -103,14 +103,14 @@ function loadItemMap(item) {
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(item.latitude, item.longitude),
             animation: google.maps.Animation.DROP,
-            label: labels[labelIndex++ % labels.length],
+            
             map: map
         });
 
 
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
-            var string = '<div jstcache="33" class="poi-info-window gm-style"> <div jstcache="2"> <div jstcache="3" class="title full-width" jsan="7.title,7.full-width">'+listArr[i].name+'</div> <div class="address"> <div jstcache="4" jsinstance="0" class="address-line full-width" jsan="7.address-line,7.full-width">'+listArr[i].address+'</div><div jstcache="4" jsinstance="1" class="address-line full-width" jsan="7.address-line,7.full-width">'+cityName+'</div></div> </div> <div jstcache="5" style="display:none"></div></div>'
+            var string = '<div jstcache="33" class="poi-info-window gm-style"> <div jstcache="2"> <div jstcache="3" class="title full-width" jsan="7.title,7.full-width">'+item.name+'</div> <div class="address"> <div jstcache="4" jsinstance="0" class="address-line full-width" jsan="7.address-line,7.full-width">'+item.address+'</div><div jstcache="4" jsinstance="1" class="address-line full-width" jsan="7.address-line,7.full-width">'+cityName+'</div></div> </div> <div jstcache="5" style="display:none"></div></div>'
           infowindow.setContent(string);
           infowindow.open(map, marker);
         }
