@@ -84,25 +84,8 @@ class place {
 
 };
 
-//to be reviewed/deleted
-function prinstArray(array) {
-    for (var i = 0; i < array.length; i++) {
-        console.log(array[i].getName);
-        console.log(array[i].getLongitude);
-        console.log(array[i].getLatitude);
-        console.log(array[i].getAddress);
-    }
-}
-
-$(".cardDiv").on("click", function (event) {
-    console.log("clicked");
-    clickedCard = $(this).attr("data");
-    event.preventDefault();
-    var city = $("#city-search").val();
-    console.log("City: " + city);
-    listLoad(city, clickedCard);
-});
-
+/* ******** Initial Page JS ********* */
+//When User leaves the city search bar
 $(".city-input").focusout(function () {
 
     if ($("#city-search").val() === "") {
@@ -120,11 +103,21 @@ $(".city-input").focusout(function () {
     }
 });
 
+//On cardSel click
+$(".cardDiv").on("click", function (event) {
+    event.preventDefault();
+    list = $(this).attr("data");
+    var city = $("#city-search").val();
+    listLoad(city , list); //Sends city name to be Geocode
+});
+
 function listLoad(city, list) {
     console.log("Load List: " + list + " for " + city);
+    geocodeCity(city);
+        
     $("#initialPage").animate({ opacity: 0 }, 800, function () {
         $("#initialPage").empty();
-        geocodeCity(city, list);
+        loadingPage(list);
     });
 }
 
@@ -133,6 +126,111 @@ $(".city-input").focus(function () {
     $(".headerBox").slideDown();
     $("#city-ipput-label").text("Enter your city");
 });
+
+//Loading Page
+var loadedList = [];
+function loadingPage(list) {
+    $("#loadingPage").css("visibility","visible");
+    $("#loadingPage").css("height", "100%");
+    $("#loadingPage").animate({opacity: 1});
+    console.log(list);
+    if (list === "visit"){
+        console.log("1");
+        var loadedArr = visitList;
+    } else if (list === "food"){
+        var loadedArr = foodList;
+    } else {
+        var loadedArr = hotelList;
+    }
+
+    
+    for (var i = 0; i < loadedArr.length; i++){
+        loadedList.push(JSON.parse(loadedArr[i]))
+    }
+    console.log(visitList);
+    geocodeAddress();
+
+    setTimeout(function(){
+        $("#loadingPage").animate({opacity: 0} , 800 , function(){
+            $("#loadingPage").css("visibility","hidden");
+            $("#loadingPage").css("height", "0");
+            displayResults();
+        });
+    }, 800);
+}
+
+
+function displayResults() {
+    listAddrArr.forEach(function(item, index){
+            loadedList[index].address = item;
+    })
+
+    var sideLeft = false;
+    
+    setTimeout(function(){
+        loadedList.forEach(function(item, index){
+
+        
+
+            var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            
+    
+            var name = $("<p>");
+            name.addClass("itemName")
+            name.text(item.name);
+    
+            var address = $("<p>");
+            address.addClass("itemDes")
+            address.text(item.address);
+    
+            
+            
+    
+            var button = $("<button>");
+            button.attr("type","button");
+            button.attr("data",index);
+            button.addClass("btn peach btn-secondary btn-lg btn-block selItemBtn");
+            button.text("Select " + labels[index]);
+    
+            var itemCard = $("<div>");
+            itemCard.addClass("card text-white bg-dark border-warning m-2");
+    
+            var row1 = $("<div>");
+            row1.addClass("row m-2");
+            var col1 = $("<div>");
+            col1.addClass("col-lg-12");
+            col1.prepend(address);
+            col1.prepend(name);
+            row1.prepend(col1);
+            itemCard.prepend(row1);
+    
+            var row2 = $("<div>");
+            row2.addClass("row m-2 idclass");
+            var col2 = $("<div>");
+            col2.addClass("col-lg-12");
+            col2.prepend(button);
+            row2.prepend(col2);
+            itemCard.prepend(row2);
+    
+            if (sideLeft==true){
+                console.log("left");
+                $("#results-right").append(itemCard);
+                sideLeft=false;
+            } else{
+                console.log("right");
+                $("#results-left").append(itemCard);
+                sideLeft=true;
+            }
+            
+            console.log(itemCard);
+        });
+        loadMap(loadedList);
+       
+    
+    });
+}
+
+
 
 function startLists() {
     //Any api function calls below

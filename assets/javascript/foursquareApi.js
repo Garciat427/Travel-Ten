@@ -33,8 +33,8 @@ function getFoodAjaxCall() {
 
         success: function (data) {
             var venues = data.response.venues;
-            console.log("FOOD response:");
-            console.log(venues);
+            //console.log("FOOD response:");
+            //console.log(venues);
 
             // loop through the API
             for (var i = 0; i < 10; i++) {
@@ -50,7 +50,9 @@ function getFoodAjaxCall() {
                 foodPlace.setAddress(venues[i].location.address);
                 
                 // push to the global visitList array
+
                 foodList.push(JSON.stringify(foodPlace));
+
                 
             }
             return foodList;

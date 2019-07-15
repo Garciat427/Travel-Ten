@@ -1,0 +1,13 @@
+
+
+.peach{
+    background : linear-gradient(40deg,#ffd86f,#fc6262)!important;
+    border: 0;
+} 
+.siteLbl{
+    font-size: 20px!important;
+}
+.resultsHeader{
+    text-align: center;
+    font-family: 'Abel', sans-serif;
+}
