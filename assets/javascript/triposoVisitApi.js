@@ -23,7 +23,7 @@ function getVisitAjaxCall() {
 
     var baseURL = getVisitURL();
 
-    console.log("URL from VISIT: " + baseURL);
+    //console.log("URL from VISIT: " + baseURL);
 
     $.ajax({
         url: baseURL,
@@ -32,8 +32,8 @@ function getVisitAjaxCall() {
     }).then(function (response) {
 
         var returnedResults = response.results;
-        console.log("VISIT response:");
-        console.log(returnedResults);
+        //console.log("VISIT response:");
+        //console.log(returnedResults);
 
         // loop through the API 
         for (var i = 0; i < returnedResults.length; i++) {

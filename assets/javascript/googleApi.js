@@ -8,7 +8,7 @@ var coordinates = ["", ""];
 var listAddrArr = [];
 
 
-function geocodeCity(city , list) {
+function geocodeCity(city) {
     cityName = city;
     var geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + cityName.replace(" ", "+") + "&key=" + googleApiKey;
     $.ajax({
@@ -17,7 +17,7 @@ function geocodeCity(city , list) {
         success: function (data) {
             coordinates[0] = (data.results[0].geometry.location.lat);
             coordinates[1] = (data.results[0].geometry.location.lng);
-            startLists(list);
+            startLists();
         }
     });
     return coordinates;
@@ -26,9 +26,6 @@ function geocodeCity(city , list) {
 function geocodeAddress() {
     var dataObj;
     var address
-    
-    console.log("Run Geocoder")
-    console.log(loadedList[i]);
     for (var i = 0; i < loadedList.length; i++){
     
             var geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + loadedList[i].latitude + ',' + loadedList[i].longitude + "&key=" + googleApiKey;
@@ -36,7 +33,6 @@ function geocodeAddress() {
                 url: geocodeUrl,
                 dataType: 'json',
                 }).then(function (data){
-                    console.log(data);
                     if (data.results[0].formatted_address) {
                         listAddrArr.push(data.results[0].formatted_address);
                     } else{
@@ -59,8 +55,6 @@ function activatePlacesSearch() {
 function loadMap(listArr) {
     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var labelIndex = 0;
-
-    console.log(listArr);
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 14,
       center: new google.maps.LatLng(coordinates[0] , coordinates[1]),
@@ -80,7 +74,6 @@ function loadMap(listArr) {
       });
       
       
-      var contentString = 
 
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
@@ -90,6 +83,36 @@ function loadMap(listArr) {
         }
       })(marker, i));
     }
-
-   
 }
+
+function loadItemMap(item) {
+    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var labelIndex = 0;
+
+    
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: new google.maps.LatLng(item.latitude, item.longitude),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(item.latitude, item.longitude),
+            animation: google.maps.Animation.DROP,
+            label: labels[labelIndex++ % labels.length],
+            map: map
+        });
+
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+            var string = '<div jstcache="33" class="poi-info-window gm-style"> <div jstcache="2"> <div jstcache="3" class="title full-width" jsan="7.title,7.full-width">'+listArr[i].name+'</div> <div class="address"> <div jstcache="4" jsinstance="0" class="address-line full-width" jsan="7.address-line,7.full-width">'+listArr[i].address+'</div><div jstcache="4" jsinstance="1" class="address-line full-width" jsan="7.address-line,7.full-width">'+cityName+'</div></div> </div> <div jstcache="5" style="display:none"></div></div>'
+          infowindow.setContent(string);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }

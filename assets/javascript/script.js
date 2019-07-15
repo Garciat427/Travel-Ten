@@ -1,6 +1,8 @@
 /* ******** FILE THAT WILL HOLD ALL JS CALLs ********* */
 
 // CLASS DEFINITION THAT WILL HOLD ALL DATA REGARDING ONE PLACE
+
+var loadedList = [];
 class place {
 
     // MANDATORY FIELDS
@@ -86,6 +88,12 @@ class place {
 
 /* ******** Initial Page JS ********* */
 //When User leaves the city search bar
+
+$(".city-input").focus(function () {
+    $("#dynamicHeader").animate({ height: 50 });
+    $(".headerBox").slideDown();
+    $("#city-ipput-label").text("Enter your city");
+});
 $(".city-input").focusout(function () {
 
     if ($("#city-search").val() === "") {
@@ -111,45 +119,49 @@ $(".cardDiv").on("click", function (event) {
     listLoad(city , list); //Sends city name to be Geocode
 });
 
+//Sel Item Btn
+
+
 function listLoad(city, list) {
     console.log("Load List: " + list + " for " + city);
     geocodeCity(city);
-        
     $("#initialPage").animate({ opacity: 0 }, 800, function () {
         $("#initialPage").empty();
         loadingPage(list);
     });
 }
 
-$(".city-input").focus(function () {
-    $("#dynamicHeader").animate({ height: 50 });
-    $(".headerBox").slideDown();
-    $("#city-ipput-label").text("Enter your city");
-});
+function startLists() {
+    //Any api function calls below
+    getFoodAjaxCall(); 
+    getVisitAjaxCall(); 
+    getHotelAjaxCall();
+}
+
+
 
 //Loading Page
-var loadedList = [];
 function loadingPage(list) {
     $("#loadingPage").css("visibility","visible");
     $("#loadingPage").css("height", "100%");
     $("#loadingPage").animate({opacity: 1});
     console.log(list);
     if (list === "visit"){
-        console.log("1");
         var loadedArr = visitList;
     } else if (list === "food"){
         var loadedArr = foodList;
     } else {
         var loadedArr = hotelList;
     }
+    console.log (loadedArr)
+    setTimeout(startAddressLookup(loadedArr), 9000); 
+}
 
-    
+function startAddressLookup (loadedArr){
     for (var i = 0; i < loadedArr.length; i++){
         loadedList.push(JSON.parse(loadedArr[i]))
     }
-    console.log(visitList);
     geocodeAddress();
-
     setTimeout(function(){
         $("#loadingPage").animate({opacity: 0} , 800 , function(){
             $("#loadingPage").css("visibility","hidden");
@@ -158,7 +170,6 @@ function loadingPage(list) {
         });
     }, 800);
 }
-
 
 function displayResults() {
     listAddrArr.forEach(function(item, index){
@@ -189,7 +200,7 @@ function displayResults() {
             var button = $("<button>");
             button.attr("type","button");
             button.attr("data",index);
-            button.addClass("btn peach btn-secondary btn-lg btn-block selItemBtn");
+            button.addClass("selItemBtn btn peach btn-secondary btn-lg btn-block ");
             button.text("Select " + labels[index]);
     
             var itemCard = $("<div>");
@@ -222,19 +233,21 @@ function displayResults() {
                 sideLeft=true;
             }
             
-            console.log(itemCard);
         });
         loadMap(loadedList);
        
     
     });
 }
+$(document).ready(function() {
 
 
-
-function startLists() {
-    //Any api function calls below
-    getFoodAjaxCall(); 
-    getVisitAjaxCall(); 
-    // getHotelAjaxCall();
-}
+    $("#results-right").on("click",'.selItemBtn' ,function (event) {
+        event.preventDefault();
+        console.log("clicked");
+        
+        var item = loadedList[$(this).attr("data")];
+        
+        loadItemMap(item);
+    });
+});

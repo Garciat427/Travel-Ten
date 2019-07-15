@@ -14,15 +14,20 @@
       <!-- CSS Links-->       
       <title>Travel-Ten</title>
   </head>
-  <nav class="navbar  sticky-top headerBox">
-    <div class="container">
-      <img src="assets/images/initialPageImages/BannerImages/EditedImages/Logo.png" class="ml-5" height="40" alt="">
-      <h1 class="bubble">Travel Made Simple.</h1>
-    </div>
-  </nav>
+  
   <body>
+    <!-- Dynamic Header -->
+    <nav class="navbar  sticky-top headerBox">
+      <div class="container">
+        <img src="assets/images/initialPageImages/BannerImages/EditedImages/Logo.png" class="ml-5" height="40" alt="">
+        <h1 class="bubble">Travel Made Simple.</h1>
+      </div>
+    </nav>
+    
+    
+    <!-- Initial Page -->
     <div id="initialPage">
-      <!-- Dynamic Header -->
+      <!-- Dynamic starting Header -->  
       <div class="mainHeader">
         <div id="dynamicHeader">
           <div id="carouselExampleFade" data-interval="2000" class="carousel slide carousel-fade" data-ride="carousel">
@@ -55,25 +60,27 @@
           </div>
         </div>
       </div>
-      
-      <!-- Main Body Content -->
+      <!-- Search and Selection -->  
       <div class="container">
         <!-- City Search Bar -->  
         <div class="row"> 
-          <div class="col-lg-1"></div> 
+          <div class="col-lg-1"></div> <!-- Spacer -->  
           <div class="col-lg-10">
             <div class="form-group">
               <label class="site-labels mt-5" for="city-input" id="city-ipput-label"></label>
               <input type="text" id="city-search" class="form-control city-input" placeholder="Toronto - San Francisco - New York - Chicago - Calgary - Ottawa - Vancouver" aria-label="Username" aria-describedby="basic-addon1" onfocus= "this.placeholder = ''">
             </div>
           </div>
-          <div class="col-lg-1"></div>
+          <div class="col-lg-1"></div><!-- Spacer -->  
         </div>
-          <div class="row mt-5">
-            <div class="col-lg-12 text-center">
-              <h3 class="cardLbl">Choose a List</h3>
-            </div>
+
+        <!-- List Selection -->  
+        <div class="row mt-5">
+          <div class="col-lg-12 text-center">
+            <h3 class="cardLbl">Choose a List</h3>
           </div>
+        </div>
+        <!-- Lists -->  
         <div class="row pt-1">
           <div class="col-lg-4 text-center mt-2 cardDiv" id="eatDiv" data = "food">
             <img class="selCard rounded mx-auto d-block pt-2" src="assets/images/initialPageImages/Card Images/EatsCard.png" >
@@ -97,6 +104,7 @@
       </div>
     </div>
 
+    <!-- Loading Page Html -->  
     <div class="container mt-3" id="loadingPage">
       <div class="row">
         <div class="col-lg-12 align-self-center">
@@ -106,50 +114,57 @@
       </div>
     </div>
 
+    <!-- Results Page -->  
     <div class="container" id="resultsCard">
+
+      <!-- Button Row -->  
       <div class="row">
-        <div class="col-lg-2"></div>
+        <div class="col-lg-2"></div><!-- Spacer -->  
         <div class="col-lg-3">
             <button type="button" class="btn btn-secondary btn-lg btn-block">List A</button>
         </div>
-        <div class="col-lg-2"></div>
+        <div class="col-lg-2"></div><!-- Spacer -->
         <div class="col-lg-3">
             <button type="button" class="btn btn-secondary btn-lg btn-block">List B</button>
         </div>
-        <div class="col-lg-2"></div>
+        <div class="col-lg-2"></div><!-- Spacer -->
       </div>
 
+      <!-- Results Card Row -->
       <div class="row">
         <div class="col-lg-12">
+          <!-- Results Card -->
           <div class="card text-white bg-dark border-warning m-5">
             <div class="card-body ">
+
+              <!-- List Header -->
               <div class="row mb-5">
                 <div class="col-lg-12">
                   <h1 class="resultsHeader">List 1</h1>
                 </div>
               </div>
 
+              <!-- Results Section -->
               <div class="row mt-5 " style="height: auto;">
+                <!-- Results Left -->
+                <div class="col-lg-3  card border-dark bg-dark resultsCard" id="results-left"><!-- Info Cards will be dynamically created here --></div>
 
-                <div class="col-lg-3  card border-dark bg-dark " id="results-left">
-
-                  
-
-                </div>
-                              
-                <div class="col-lg-6" id="results-center">
+                <!-- Map Section-->             
+                <div class="col-lg-6 card border-dark bg-dark resultsCard" id="results-center">
                     <div id="map" style="width: 100%; height: 100%;"></div>
                 </div>
-                <div class="col-lg-3" id="results-right">
-                  
-                </div>
+
+                <!-- Results Right -->
+                <div class="col-lg-3 card border-dark bg-dark" id="results-right"><!-- Info Cards will be dynamically created here --></div>
               </div>
+
             </div>
           </div>
+
         </div>
       </div>
+
     </div>
-  </div>
 
     <!-- Sticky Footer -->
     <nav class="navbar fixed-bottom navbar-dark bg-dark">

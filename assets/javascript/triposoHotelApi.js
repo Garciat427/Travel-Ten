@@ -49,7 +49,7 @@ function getHotelAjaxCall() {
             hotelPlace.setImgUrl(response.results[i].images[0].source_url);
 
             // push to the global visitList array
-            hotelList.push(hotelPlace);
+            hotelList.push(JSON.stringify(hotelPlace));
         }
         return hotelList;
     });

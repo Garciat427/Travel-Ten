@@ -25,7 +25,7 @@ function getFoodAjaxCall() {
 
     var baseURL = getFoodURL();
 
-    console.log("URL from FOOD: " + baseURL);
+    //console.log("URL from FOOD: " + baseURL);
 
     $.ajax({
         url: baseURL,
