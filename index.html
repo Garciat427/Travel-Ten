@@ -121,11 +121,11 @@
       <div class="row">
         <div class="col-lg-2"></div><!-- Spacer -->  
         <div class="col-lg-3">
-            <button type="button" class="btn btn-secondary btn-lg btn-block">List A</button>
+            <button type="button" class="btn btn-secondary btn-lg btn-block btnList" data="A" id="btnList1">List A</button>
         </div>
         <div class="col-lg-2"></div><!-- Spacer -->
         <div class="col-lg-3">
-            <button type="button" class="btn btn-secondary btn-lg btn-block">List B</button>
+            <button type="button" class="btn btn-secondary btn-lg btn-block btnList" data="B" id="btnList2">List B</button>
         </div>
         <div class="col-lg-2"></div><!-- Spacer -->
       </div>
@@ -144,6 +144,15 @@
                 </div>
               </div>
 
+              <div class="row mb-5">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                  <button type="button" class="btn btn-secondary btn-lg btn-block" data="A" id="resetView">Reset View</button>
+                </div>
+                <div class="col-lg-4"></div>
+              </div>
+             
+
               <!-- Results Section -->
               <div class="row mt-5 " style="height: auto;" id="results">
                 <!-- Results Left -->
@@ -151,7 +160,7 @@
 
                 <!-- Map Section-->             
                 <div class="col-lg-6 card border-dark bg-dark resultsCard" id="results-center">
-                    <div id="map" style="width: 100%; height: 100%;"></div>
+                    <div id="map" style="width: 100%; height: 100%; opacity: 0;"></div>
                 </div>
 
                 <!-- Results Right -->
