@@ -57,7 +57,7 @@ function geocodeCordToAddr() {
       loadedList[index].address = item;
     });
     displayResults(); //Call to Display Results on completion
-  },1000);
+  },3000);
 }
 
 //Function used to load full map with entire list

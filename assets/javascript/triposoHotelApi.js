@@ -26,7 +26,7 @@ function getHotelAjaxCall() {
         url: baseURL,
         method: "GET"
     }).then(function (response) {
-    
+        var returnedResults = response.results;    
         // loop through the API 
         for (var i = 0; i < 10; i++) {
         
