@@ -132,7 +132,7 @@ function startListsAndTransition() {
     getVisitAjaxCall(); 
     getHotelAjaxCall();
     //Start Transition
-    $("#initialPage").animate({ opacity: 0 }, 1000, function () {
+    $("#initialPage").animate({ opacity: 0 }, 800, function () {
         //Then After page fade, Remove initial Page and start LoadPage
         $("#initialPage").empty();
         loadingPage();
@@ -147,7 +147,9 @@ function loadingPage() {
     $("#loadingPage").css("height", "100%");
     
     //Animate Loading list then run List Selector (Delay to allow more time for data call)
-    $("#loadingPage").animate({opacity: 1} , 800 , selList);
+    $("#loadingPage").animate({opacity: 1} , 800 , function(){
+        setTimeout(selList,3000);
+    });
 }
 
 function selList(){
@@ -187,6 +189,7 @@ function selList(){
     }
     //Call For Addresses of Venues
     geocodeCordToAddr();
+    saveAsyncResultsToFireBaseDB(cityName, coordinates[1], coordinates[0], visitList, foodList, hotelList, Date.now());
 };
 
 
