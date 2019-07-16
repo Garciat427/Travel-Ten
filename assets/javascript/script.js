@@ -270,13 +270,14 @@ function resetReponse() {
     });
 }
     
-//Event for any Item Btn Clicks (Focused State)
+//Event To reset and repopulate map
 $("#resetView").on("click", function(event){
     $("#map").css('opacity' ,  0);
     loadMap(loadedList)
     $("#map").animate({opacity: 1} , 800)
 });
 
+//Event for any Item Btn Clicks (Focused State)
 $("#results").on("click",'.selItemBtn' ,function (event) {
     event.preventDefault();
     var item = loadedList[$(this).attr("data")];
@@ -293,4 +294,3 @@ $(".btnList").on("click",function (event) {
     
 });
 
-    
