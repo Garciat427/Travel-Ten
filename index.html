@@ -8,21 +8,27 @@
       <!-- CSS Links-->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
       <link rel="stylesheet" href="assets/css/initialPage.css">
+      <link rel="stylesheet" href="assets/css/loadingPage.css">
+      <link rel="stylesheet" href="assets/css/resultsPage.css">
       <link href="https://fonts.googleapis.com/css?family=Abel|Roboto|Fredoka+One&display=swap" rel="stylesheet">
       <!-- CSS Links-->       
       <title>Travel-Ten</title>
   </head>
-    
+  
   <body>
+    <!-- Dynamic Header -->
+    <nav class="navbar  sticky-top headerBox">
+      <div class="container">
+        <img src="assets/images/initialPageImages/BannerImages/EditedImages/Logo.png" class="ml-5" height="40" alt="">
+        <h1 class="bubble">Travel Made Simple.</h1>
+      </div>
+    </nav>
+    
+    
+    <!-- Initial Page -->
     <div id="initialPage">
-      <!-- Dynamic Header -->
+      <!-- Dynamic starting Header -->  
       <div class="mainHeader">
-          <nav class="navbar  sticky-top headerBox">
-            <div class="container">
-              <img src="assets/images/initialPageImages/BannerImages/EditedImages/Logo.png" class="ml-5" height="40" alt="">
-              <h1 class="bubble">Travel Made Simple.</h1>
-            </div>
-          </nav>
         <div id="dynamicHeader">
           <div id="carouselExampleFade" data-interval="2000" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner">
@@ -54,33 +60,35 @@
           </div>
         </div>
       </div>
-      
-      <!-- Main Body Content -->
+      <!-- Search and Selection -->  
       <div class="container">
         <!-- City Search Bar -->  
         <div class="row"> 
-          <div class="col-lg-1"></div> 
+          <div class="col-lg-1"></div> <!-- Spacer -->  
           <div class="col-lg-10">
             <div class="form-group">
               <label class="site-labels mt-5" for="city-input" id="city-ipput-label"></label>
               <input type="text" id="city-search" class="form-control city-input" placeholder="Toronto - San Francisco - New York - Chicago - Calgary - Ottawa - Vancouver" aria-label="Username" aria-describedby="basic-addon1" onfocus= "this.placeholder = ''">
             </div>
           </div>
-          <div class="col-lg-1"></div>
+          <div class="col-lg-1"></div><!-- Spacer -->  
         </div>
-          <div class="row mt-5">
-            <div class="col-lg-12 text-center">
-              <h3 class="cardLbl">Choose a List</h3>
-            </div>
+
+        <!-- List Selection -->  
+        <div class="row mt-5">
+          <div class="col-lg-12 text-center">
+            <h3 class="cardLbl">Choose a List</h3>
           </div>
+        </div>
+        <!-- Lists -->  
         <div class="row pt-1">
-          <div class="col-lg-4 text-center mt-2 cardDiv" id="eatDiv" data = "eat">
+          <div class="col-lg-4 text-center mt-2 cardDiv" id="eatDiv" data = "food">
             <img class="selCard rounded mx-auto d-block pt-2" src="assets/images/initialPageImages/Card Images/EatsCard.png" >
             <div class="overlay">
               <h3>Eats</h3>
             </div>
           </div>
-          <div class="col-lg-4 text-center mt-2 cardDiv pt-2" id="sleepDiv" data = "sleep">
+          <div class="col-lg-4 text-center mt-2 cardDiv pt-2" id="sleepDiv" data = "hotel">
             <img class="selCard rounded mx-auto d-block" src="assets/images/initialPageImages/Card Images/SleepCard.png" >
             <div class="overlay">
               <h3>Sleeps</h3>
@@ -96,7 +104,76 @@
       </div>
     </div>
 
-    
+    <!-- Loading Page Html -->  
+    <div class="container mt-3" id="loadingPage">
+      <div class="row">
+        <div class="col-lg-12 align-self-center">
+            <img class="mx-auto d-block" id="loadingGif" src="assets/images/loadingPageGif.gif">
+            <h1 class="bubble text-center">Hang on just a sec! Finding you places now!</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Page -->  
+    <div class="container" id="resultsCard">
+
+      <!-- Button Row -->  
+      <div class="row">
+        <div class="col-lg-2"></div><!-- Spacer -->  
+        <div class="col-lg-3">
+            <button type="button" class="btn btn-secondary btn-lg btn-block btnList" data="A" id="btnList1">List A</button>
+        </div>
+        <div class="col-lg-2"></div><!-- Spacer -->
+        <div class="col-lg-3">
+            <button type="button" class="btn btn-secondary btn-lg btn-block btnList" data="B" id="btnList2">List B</button>
+        </div>
+        <div class="col-lg-2"></div><!-- Spacer -->
+      </div>
+
+      <!-- Results Card Row -->
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- Results Card -->
+          <div class="card text-white bg-dark border-warning m-5">
+            <div class="card-body ">
+
+              <!-- List Header -->
+              <div class="row mb-5">
+                <div class="col-lg-12">
+                  <h1 class="resultsHeader" id="listTitle">List 1</h1>
+                </div>
+              </div>
+
+              <div class="row mb-5">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                  <button type="button" class="btn btn-secondary btn-lg btn-block" data="A" id="resetView">Reset View</button>
+                </div>
+                <div class="col-lg-4"></div>
+              </div>
+             
+
+              <!-- Results Section -->
+              <div class="row mt-5 " style="height: auto;" id="results">
+                <!-- Results Left -->
+                <div class="col-lg-3  card border-dark bg-dark resultsCard" id="results-left"><!-- Info Cards will be dynamically created here --></div>
+
+                <!-- Map Section-->             
+                <div class="col-lg-6 card border-dark bg-dark resultsCard" id="results-center">
+                    <div id="map" style="width: 100%; height: 100%; opacity: 0;"></div>
+                </div>
+
+                <!-- Results Right -->
+                <div class="col-lg-3 card border-dark bg-dark" id="results-right"><!-- Info Cards will be dynamically created here --></div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
 
     <!-- Sticky Footer -->
     <nav class="navbar fixed-bottom navbar-dark bg-dark">

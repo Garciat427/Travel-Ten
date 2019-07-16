@@ -22,19 +22,11 @@ function getHotelURL() {
 function getHotelAjaxCall() {
 
     baseURL = getHotelURL();
-
-    console.log("URL from HOTEL: " + baseURL);
-
     $.ajax({
         url: baseURL,
         method: "GET"
     }).then(function (response) {
     
-        var returnedResults = response.results;
-
-        console.log("HOTEL response:");
-        console.log(returnedResults);
-
         // loop through the API 
         for (var i = 0; i < 10; i++) {
         
@@ -51,7 +43,7 @@ function getHotelAjaxCall() {
             hotelPlace.setImgUrl(returnedResults[i].images[0].source_url);
 
             // push to the global visitList array
-            hotelList.push(hotelPlace);
+            hotelList.push(JSON.stringify(hotelPlace));
         }
         return hotelList;
     });
