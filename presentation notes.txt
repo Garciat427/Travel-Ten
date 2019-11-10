@@ -1,0 +1,46 @@
+
+link https://github.com/Garciat427/Travel-Ten
+
+wow
+why
+what 
+when 
+who and how
+
+
+-stats of what is being searched
+-making an account - to save userpreferences using firebase
+-
+
+PRESENTATION NOTES
+
+Introduction - arif
+	tell the audience about what will be presented
+	what are we trying to solve - an alternative to trip advisor, our page is not overly commercial but it will give top 10 lists 
+but more focus on what locals like
+	what did we end up making - top 10 liked by all	
+	high level challenges - making api calls from travel websites was hard due to their commercially driven options
+
+discuss coding challenge 1 - candido - 30 seconds to a min would be good
+	use of class - collecting multiple bits of information in the code
+
+discuss coding challenge 2 - troy - maybe discuss 2, don't have to do all 3. 30 seconds to a minute is okay
+	challenges with html and css
+	google maps
+	geo tags
+
+demonstration of website - majed
+	design
+	use of css and use of animation for an enjoyable user experience
+	search features with suggestions
+	search results
+
+future state and closing - arif
+	mvp
+	in the future, we would like to see search trends and save them 
+	provide an option for user to make an account
+	drive closer to our original vision of providing alternative suggestion and not top tourist areas only
+	provide options to follow a link and book options
+	website does not fully run in all web browsers
+	
+

@@ -12,7 +12,7 @@ function getHotelURL() {
     url = "https://www.triposo.com/api/20181213/poi.json?";
     url += "annotate=distance:" + coordinates[0] + "," + coordinates[1]; //latitude X longitude. Example toronto "43.6681852" X "-79.3950505"
     url += "&distance=<10000";
-    url += "&tag_labels=hotel";
+    url += "&tag_labels=hotels";
     url += "&count=10";
     url += "&account=" + apiAccountID;
     url += "&token=" + apiKey;
