@@ -4,7 +4,7 @@
 var cityName
 var coordinates = ["", ""];
 var labelIndex = 0;
-
+// testing new api key
 var googleApiKey = "AIzaSyBL7Zb4UOIfJTANNFWQowVLSd9NG40agcQ"
 
 //Function to allow for Autocomplete within the city search field
