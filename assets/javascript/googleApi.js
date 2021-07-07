@@ -4,8 +4,8 @@
 var cityName
 var coordinates = ["", ""];
 var labelIndex = 0;
-
-var googleApiKey = "AIzaSyDHgz_wG-Dmq9lS70RvyrgVnFdSiNh2m6c"
+// testing new api key
+var googleApiKey = "AIzaSyBL7Zb4UOIfJTANNFWQowVLSd9NG40agcQ";
 
 //Function to allow for Autocomplete within the city search field
 function activatePlacesSearch() {
