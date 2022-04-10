@@ -132,7 +132,7 @@ function startListsAndTransition() {
     getVisitAjaxCall(); 
     getHotelAjaxCall();
     //Start Transition
-    $("#initialPage").animate({ opacity: 0 }, 1000, function () {
+    $("#initialPage").animate({ opacity: 0 }, 800, function () {
         //Then After page fade, Remove initial Page and start LoadPage
         $("#initialPage").empty();
         loadingPage();
@@ -147,7 +147,9 @@ function loadingPage() {
     $("#loadingPage").css("height", "100%");
     
     //Animate Loading list then run List Selector (Delay to allow more time for data call)
-    $("#loadingPage").animate({opacity: 1} , 800 , selList);
+    $("#loadingPage").animate({opacity: 1} , 500 , function(){
+        setTimeout(selList,3000);
+    });
 }
 
 function selList(){
@@ -194,7 +196,7 @@ function displayResults() {
     var sideLeft = false;
 
     //Hide Loading Page Html then make results card visible
-    $("#loadingPage").animate({opacity: 0} , 2500 , function(){
+    $("#loadingPage").animate({opacity: 0} , 2000 , function(){
         $("#loadingPage").css("visibility","hidden");
         $("#loadingPage").css("height", "0");
         $("#resultsCard").animate({opacity: 1} , 800);
